@@ -1,13 +1,26 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Dashboard from "./pages/Dashboard";
+import ProtectedRoute from "./components/ProtectedRoute";
+import { useEffect } from "react";
+
 
 function App() {
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      console.log("User already logged in");
+     
+    }
+  }, []);
+
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/dashboard" element={<ProtectedRoute> <Dashboard /></ProtectedRoute>}/>
       </Routes>
     </BrowserRouter>
   );
