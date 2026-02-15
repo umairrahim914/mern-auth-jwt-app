@@ -1,4 +1,17 @@
+import axios from "../utils/axios";
+import { useEffect } from "react";
 function Dashboard() {
+
+  
+  useEffect(() => {
+    const fetchUser = async () => {
+      const res = await axios.get("/auth/me");
+      console.log(res.data);
+    };
+
+    fetchUser();
+  }, []);
+
 
   const logout = () => {
   localStorage.removeItem("token");

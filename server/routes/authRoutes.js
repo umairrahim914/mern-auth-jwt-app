@@ -3,8 +3,17 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 
+const protect = require("../middleware/authMiddleware");
 
 const router = express.Router();
+
+router.get("/me", protect, (req, res) => {
+  res.json({
+    message: "Protected route accessed",
+    user: req.user
+  });
+});
+
 
 // Register
 router.post("/register", async (req, res) => {
